@@ -15,6 +15,10 @@ const typeDefs = `#graphql
   type Query {
     networks: [Network!]!
   }
+
+  type Mutation {
+    generateNewWallet(password: String!): String!
+  }
 `;
 
 module.exports = typeDefs;
