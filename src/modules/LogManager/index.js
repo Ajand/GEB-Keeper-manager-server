@@ -1,0 +1,3 @@
+const saveLog = () => {};
+
+const parseLog = () => {};
