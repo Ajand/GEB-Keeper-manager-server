@@ -2,9 +2,12 @@ const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
+const connectDB = require("./mongo");
 
 const systemStartup = async () => {
   console.log("Starting the system ...");
+
+  connectDB();
 
   const server = new ApolloServer({
     typeDefs,
