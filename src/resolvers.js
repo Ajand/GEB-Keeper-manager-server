@@ -1,9 +1,10 @@
 const { getNetworks } = require("./modules/NetworkManager");
-const { generateNewWallet } = require("./modules/WalletManager");
+const { generateNewWallet, getWallets } = require("./modules/WalletManager");
 
 const resolvers = {
   Query: {
     networks: () => getNetworks(),
+    wallets: () => getWallets(),
   },
   Mutation: {
     generateNewWallet: (_, { password }) => {

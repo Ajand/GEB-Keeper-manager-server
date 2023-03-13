@@ -12,8 +12,32 @@ const typeDefs = `#graphql
     contracts: String
   }
 
+  type Wallet {
+    address: String!
+    usages: [WalletUsage!]!
+    networkBalances: [NetworkBalance!]!
+    systemBalances: [SystemBalance!]!
+  }
+
+  type WalletUsage {
+    network: String!
+    system: String!
+  }
+
+  type NetworkBalance {
+    network: String!
+    amount: String!
+  }
+
+  type SystemBalance {
+    network: String!
+    system: String!
+    amount: String!
+  }
+
   type Query {
     networks: [Network!]!
+    wallets: [Wallet!]!
   }
 
   type Mutation {
