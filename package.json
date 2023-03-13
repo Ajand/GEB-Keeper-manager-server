@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dockerode": "^3.3.4"
+    "@apollo/server": "^4.5.0",
+    "dockerode": "^3.3.4",
+    "graphql": "^16.6.0"
   }
 }
