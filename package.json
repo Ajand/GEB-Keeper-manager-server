@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/server": "^4.5.0",
     "dockerode": "^3.3.4",
+    "ethereum-checksum-address": "^0.0.8",
     "graphql": "^16.6.0",
     "keythereum": "^2.0.0",
     "mongoose": "^7.0.1"

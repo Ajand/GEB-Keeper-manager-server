@@ -42,6 +42,13 @@ const typeDefs = `#graphql
 
   type Mutation {
     generateNewWallet(password: String!): String!
+    startKeeper(
+      keeperName: String!
+      wallet: String!
+      network: String!
+      system: String!
+      flashSwap: Boolean!
+    ): String!
   }
 `;
 
