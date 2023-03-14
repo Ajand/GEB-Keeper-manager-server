@@ -6,8 +6,11 @@ const resolvers = {
   Query: {
     networks: () => getNetworks(),
     wallets: () => getWallets(),
-    keepers: () => getKeepers(),
-    keeper: (_, { id }) => getKeeper(1),
+    keepers: async () => {
+      const keepers = await getKeepers();
+      return keepers;
+    },
+    keeper: (_, { id }) => getKeeper(id),
   },
   Mutation: {
     generateNewWallet: (_, { password }) => {

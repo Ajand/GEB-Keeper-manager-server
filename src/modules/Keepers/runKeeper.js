@@ -2,6 +2,7 @@ const { spawn } = require("child_process");
 const { toChecksumAddress } = require("ethereum-checksum-address");
 const path = require("path");
 const { methods } = require("./model");
+const logModel = require("../LogManager/model");
 
 const runKeeper = (keeperId, wallet) => {
   const walletPath = path.join(__dirname, "..", "..", "..", "wallets");
@@ -22,18 +23,13 @@ const runKeeper = (keeperId, wallet) => {
   ]);
 
   container.stdout.on("data", (data) => {
+    logModel.methods.commands.saveLog(keeperId, data);
     console.log(`stdout: ${data}`);
   });
 
-  let sented = false;
-
   container.stderr.on("data", (data) => {
+    logModel.methods.commands.saveLog(keeperId, data);
     console.error(`stderr: ${data}`);
-    if (!sented) {
-      container.stdin.write("console.log('Hello!');\n");
-      container.stdin.end(); // EOF
-      sented = true;
-    }
   });
 
   container.on("exit", (r) => {

@@ -1,5 +1,6 @@
 const runKeeper = require("./runKeeper");
 const { methods } = require("./model");
+const logModel = require("../LogManager/model");
 
 const startKeeper = async ({
   keeperName,
@@ -20,12 +21,30 @@ const startKeeper = async ({
   return keeper._id;
 };
 
-const getKeepers = () => {
-  return methods.queries.getKeepers();
+const getKeepers = async () => {
+  const keepers = await methods.queries.getKeepers();
+
+  const mappedKeepers = keepers.map(async (keeper) => {
+    const logs = await logModel.methods.queries.getKeeperLog(keeper._id);
+    return {
+      ...keeper._doc,
+      logs,
+    };
+  });
+
+  const final = await Promise.all(mappedKeepers);
+
+  return final;
 };
 
-const getKeeper = (id) => {
-  return methods.queries.getKeeper(id);
+const getKeeper = async (id) => {
+  const keeper = await methods.queries.getKeeper(id);
+  const logs = await logModel.methods.queries.getKeeperLog(keeper._id);
+
+  return {
+    ...keeper._doc,
+    logs,
+  };
 };
 
 module.exports = {

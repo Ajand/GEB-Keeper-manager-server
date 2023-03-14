@@ -53,9 +53,9 @@ const getKeepers = () => {
   });
 };
 
-const getKeeper = (id) => {
+const getKeeper = (_id) => {
   return new Promise(async (resolve, reject) => {
-    return Keeper.findOne({ id })
+    return Keeper.findOne({ _id })
       .then((r) => resolve(r))
       .catch((err) => reject(err));
   });

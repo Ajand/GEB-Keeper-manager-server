@@ -43,6 +43,11 @@ const typeDefs = `#graphql
     system: String!
     wallet: String!
     status: String!
+    logs: [Log!]!
+  }
+
+  type Log {
+    message: String!
   }
 
   type Query {
