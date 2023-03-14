@@ -13,6 +13,7 @@ const typeDefs = `#graphql
   }
 
   type Wallet {
+    _id: ID!
     address: String!
     usages: [WalletUsage!]!
     networkBalances: [NetworkBalance!]!
@@ -35,9 +36,20 @@ const typeDefs = `#graphql
     amount: String!
   }
 
+  type Keeper {
+    _id: ID!
+    name: String!
+    network: String!
+    system: String!
+    wallet: String!
+    status: String!
+  }
+
   type Query {
     networks: [Network!]!
     wallets: [Wallet!]!
+    keepers: [Keeper!]!
+    keeper(id: ID!): Keeper
   }
 
   type Mutation {

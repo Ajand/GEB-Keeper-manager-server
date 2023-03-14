@@ -1,8 +1,9 @@
 const { spawn } = require("child_process");
 const { toChecksumAddress } = require("ethereum-checksum-address");
 const path = require("path");
+const { methods } = require("./model");
 
-const runKeeper = (wallet) => {
+const runKeeper = (keeperId, wallet) => {
   const walletPath = path.join(__dirname, "..", "..", "..", "wallets");
 
   const container = spawn("docker", [
@@ -33,6 +34,10 @@ const runKeeper = (wallet) => {
       container.stdin.end(); // EOF
       sented = true;
     }
+  });
+
+  container.on("exit", (r) => {
+    methods.commands.changeKeeperStatus(keeperId, "exited");
   });
 };
 
