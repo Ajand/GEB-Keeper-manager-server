@@ -1,5 +1,7 @@
 const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
+const LogManager = require("./modules/LogManager");
+LogManager.main();
 const typeDefs = require("./typeDefs");
 const resolvers = require("./resolvers");
 const connectDB = require("./mongo");

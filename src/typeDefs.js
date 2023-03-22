@@ -48,6 +48,8 @@ const typeDefs = `#graphql
 
   type Log {
     message: String!
+    variant: String!
+    date: String!
   }
 
   type Query {

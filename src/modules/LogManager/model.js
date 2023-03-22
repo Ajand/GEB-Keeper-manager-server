@@ -10,6 +10,14 @@ const LogSchema = mongoose.Schema(
       type: "string",
       required: true,
     },
+    date: {
+      type: Date,
+      required: true,
+    },
+    variant: {
+      type: "string",
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -20,10 +28,12 @@ const Log = mongoose.model("log", LogSchema);
 
 // keeperId
 
-const saveLog = (keeperId, message) => {
+const saveLog = ({ keeperId, message, variant, date }) => {
   const log = new Log({
     keeperId,
     message,
+    variant,
+    date,
   });
   return log.save();
 };
