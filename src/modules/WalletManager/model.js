@@ -12,6 +12,10 @@ const WalletSchema = mongoose.Schema(
         system: "string",
       },
     ],
+    inUseOf: {
+      network: "string",
+      system: "string",
+    },
     networkBalances: [
       {
         network: "string",
@@ -46,6 +50,10 @@ const getWallets = () => {
   });
 };
 
+const setInUse = (address, network, system) => {
+  return Wallet.updateOne({ address }, { $set: { network, system } });
+};
+
 module.exports = {
   collection: Wallet,
   methods: {
@@ -54,6 +62,7 @@ module.exports = {
     },
     commands: {
       saveWallet,
+      setInUse,
     },
   },
 };

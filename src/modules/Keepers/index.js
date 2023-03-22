@@ -1,6 +1,8 @@
 const runKeeper = require("./runKeeper");
 const { methods } = require("./model");
 const logModel = require("../LogManager/model");
+const { getNetworks } = require("../NetworkManager");
+const Wallets = require("../WalletManager/model");
 
 const startKeeper = async ({
   keeperName,
@@ -16,7 +18,24 @@ const startKeeper = async ({
     system,
     flashSwap,
   });
-  runKeeper(keeper._id, wallet);
+  const networks = getNetworks();
+
+  const selectedNetwork = networks.find((net) => net.name === network);
+  console.log("are we here?", selectedNetwork);
+
+  const selectedSystem = selectedNetwork.systems.find(
+    (sys) => sys.name === system
+  );
+  console.log("are we here?", selectedNetwork, selectedSystem);
+
+  await Wallets.methods.commands.setInUse(wallet, network, system);
+
+  runKeeper({
+    keeperId: keeper._id,
+    wallet,
+    system: selectedSystem,
+    network: selectedNetwork,
+  });
 
   return keeper._id;
 };
