@@ -1,9 +1,8 @@
 const { generateKeyPassFile } = require("./keyfileManager");
 const { methods } = require("./model");
 
-const generateNewWallet = async (password) => {
-  const address = generateKeyPassFile(password);
-  await methods.commands.saveWallet(address);
+const generateNewWallet = async (privateKey, password) => {
+  const address = await generateKeyPassFile(privateKey, password);
   return address;
 };
 

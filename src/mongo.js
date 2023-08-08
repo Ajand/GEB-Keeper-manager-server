@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // TODO db connector must refactored
 
-const DB_NAME = "geb_keepers";
+const DB_NAME = "geb_keepers_controller";
 
 const connectDB = async () => {
   try {

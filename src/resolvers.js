@@ -1,6 +1,7 @@
 const { getNetworks } = require("./modules/NetworkManager");
 const { generateNewWallet, getWallets } = require("./modules/WalletManager");
 const { startKeeper, getKeepers, getKeeper } = require("./modules/Keepers");
+const { getSystems } = require('./modules/Systems')
 
 const resolvers = {
   Query: {
@@ -11,13 +12,15 @@ const resolvers = {
       return keepers;
     },
     keeper: (_, { id }) => getKeeper(id),
+    systems: () => getSystems()
   },
   Mutation: {
     generateNewWallet: (_, { password }) => {
       return generateNewWallet(password);
     },
-    startKeeper: (_, { keeperName, wallet, network, system, flashSwap }) => {
-      return startKeeper({ keeperName, wallet, network, system, flashSwap });
+    startKeeper: (_, params) => {
+      const { system, network, collateral, privateKey, options } = params;
+      return startKeeper({ system, network, collateral, privateKey, options });
     },
   },
 };

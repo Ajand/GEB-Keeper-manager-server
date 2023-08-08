@@ -5,30 +5,7 @@ const WalletSchema = mongoose.Schema(
     address: {
       type: "string",
       required: true,
-    },
-    usages: [
-      {
-        network: "string",
-        system: "string",
-      },
-    ],
-    inUseOf: {
-      network: "string",
-      system: "string",
-    },
-    networkBalances: [
-      {
-        network: "string",
-        amount: "string",
-      },
-    ],
-    systemBalances: [
-      {
-        network: "string",
-        system: "string",
-        amount: "string",
-      },
-    ],
+    }
   },
   {
     timestamps: true,

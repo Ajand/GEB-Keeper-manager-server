@@ -6,12 +6,6 @@ const typeDefs = `#graphql
     systems: [System!]!
   }
 
-  type System {
-    name: String!
-    graph_endpoint: String
-    contracts: String
-  }
-
   type Wallet {
     _id: ID!
     address: String!
@@ -38,12 +32,13 @@ const typeDefs = `#graphql
 
   type Keeper {
     _id: ID!
-    name: String!
+    collateral: String!
     network: String!
     system: String!
     wallet: String!
     status: String!
-    logs: [Log!]!
+    options: [String!]!
+    logs: String!
   }
 
   type Log {
@@ -51,22 +46,40 @@ const typeDefs = `#graphql
     variant: String!
     date: String!
   }
+  
+  type Collateral {
+    name: String!
+    address: String!
+  }
+  
+  type SystemNetwork {
+    name: String!
+    nativeCoin: String!
+    systemCoin: String!
+    collaterals: [Collateral!]!
+  }
+  
+  type System {
+    name: String!
+    networks: [SystemNetwork!]!
+  }
 
   type Query {
     networks: [Network!]!
     wallets: [Wallet!]!
     keepers: [Keeper!]!
     keeper(id: ID!): Keeper
+    systems: [System!]!
   }
 
   type Mutation {
     generateNewWallet(password: String!): String!
     startKeeper(
-      keeperName: String!
-      wallet: String!
-      network: String!
       system: String!
-      flashSwap: Boolean!
+      network: String!
+      collateral: String!
+      privateKey: String!
+      options: [String!]!
     ): String!
   }
 `;
