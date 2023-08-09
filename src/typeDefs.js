@@ -80,7 +80,8 @@ const typeDefs = `#graphql
       collateral: String!
       privateKey: String!
       options: [String!]!
-    ): String!
+    ): Keeper!
+    changeKeeperStatus(keeperId: ID!): String
   }
 `;
 

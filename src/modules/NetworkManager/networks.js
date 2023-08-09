@@ -19,7 +19,8 @@ const networks = [
   },
   {
     id: 5,
-    rpc_uri: "https://goerli.infura.io/v3/7a3ae98793214e75b0686d31b7fa2c56",
+    rpc_uri:
+      "https://eth-goerli.g.alchemy.com/v2/l_THcPj6shiZ-E1LyKHnHeXx75E1iXrT",
     name: "Goerli",
     systems: [
       {

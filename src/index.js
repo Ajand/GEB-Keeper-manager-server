@@ -3,13 +3,15 @@ const { startStandaloneServer } = require("@apollo/server/standalone");
 const LogManager = require("./modules/LogManager");
 LogManager.main();
 const typeDefs = require("./typeDefs");
-const resolvers = require("./resolvers");
+const resolverCreator = require("./resolvers");
 const connectDB = require("./mongo");
 
 const systemStartup = async () => {
   console.log("Starting the system ...");
 
   connectDB();
+
+  const resolvers = await resolverCreator();
 
   const server = new ApolloServer({
     typeDefs,
