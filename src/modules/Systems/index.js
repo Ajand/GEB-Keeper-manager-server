@@ -29,7 +29,7 @@ const systems = [
   },
   {
     name: "TAI",
-    image: "thetwo/tai-keeper",
+    image: "tai-keeper",
     networks: [
       {
         name: "Mainnet",
